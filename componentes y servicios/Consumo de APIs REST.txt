@@ -1,0 +1,36 @@
+Solicitudes GET
+
+El verbo HTTP GET en JavaScript suele utilizarse para la obtención de datos. Por ejemplo, una lista de productos o el detalle de un único producto en particular.
+
+Pasos para el consumo de API con Angular
+El primer paso para el consumo de API con Angular es la importación del módulo correspondiente y los servicios, luego sigue la siguiente guía para proceder en tu camino.
+
+1. Importa los módulos
+Asegúrate de importar HttpClientModule en el módulo principal de tu proyecto.
+
+
+DATA TRANSFER OBJECT
+
+informacion de transferencia
+
+{
+	"title": "nuevo producto",
+	"price": 121,
+	"categoryid": 1,
+} 
+
+RESPONDE 
+
+{
+	"title": "nuevo producto",
+	"price": 121,
+	"categoryid": 1,
+} 
+"id": 51
+} 	
+
+GET // Obtener informacion
+POST // Creacion de informacion 
+PUT & PATCH // ACTUALIZACION 
+PUT // Enviar Toda la info
+PATCH  // Edicion de un atributo en particular  

@@ -1,0 +1,178 @@
+0Verifica versión de Node: node -v
+
+Verifica versión de npm: npm -v
+
+Instala el CLI de Angular: npm i -g @angular/cli
+
+Verifica tu instalación: ng version
+
+Crea tu primer proyecto: ng new my-project
+
+Ejecuta el servidor de desarrollo: ng serve Dentro de la carpeta de tu proyecto
+
+ng serve -o se usa para automaticamente abrir el proyecto en tu navegador predeterminado 
+
+ng serve -o --port=3500 se ejecuta  automaticamente abrir el proyecto en tu navegador predeterminado y en el puerto seleccionado 
+
+
+STRING {{INTERPOLATIO}} 
+Es la forma en que nosotros desde la logica podemos pasar datos a renderizar en nuestro template en este caso es nuestra VISTA, es la forma en que usando doble 
+llaves puedes implementar estas funciones con una expresion dentro de ella y obtener un resultado 
+
+ejemplo
+
+{{1 + 1}}
+{{myVar}}
+{{myFunction}}   
+
+<h1> HOLA MUNDO</h1>
+<h2> {{ 'Hola Mundo'.repeat(5) }}</h2>
+<p> 3 + 3 = {{3 + 3}} </p>
+<h3>Hola, soy {{ name }} y tengo {{age}}</h3>
+<img src={{img}} alt="Image">
+
+
+
+PROPERTY [BINDING]
+es la forma donde se puede modificar atributos desde el controlador y mandarlos al tempalete 
+
+ejemplo 
+<h1>propiedades</h1>
+<button [disabled]="btnDisabled">Enviar</button>
+<input type="text" [value]="personn.name" />
+<progress max="100" [value]="personn.age"> </progress>
+<img width="120" [src]="personn.avatar" />
+
+EVENT (BINDING)
+
+La importancia del Event Binding en Angular está dada por la posibilidad de comunicar el componente y la vista, el código TS con el código HTML, intercambiando 
+datos entre ellos.
+
+Puedes enviarle al controlador el evento completo que se produce en la vista. Para esto, solo declara un parámetro $event en el método que se encuentra escuchando 
+el evento.
+
+<div class="box" (scroll)="onscroll($event)">
+<p>orem ipsum dolor sit amet consectetur adipisicing elit. Magnam modi quia rerum minus dolore odio corporis alias velit quod, distinctio officiis eos omnis magni 
+nam deleniti beatae qui fuga voluptates! Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature 
+from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, 
+consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from 
+sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of 
+ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.</p>
+</div>
+
+°como leer un evento de un input°
+
+<input type="text" [value]="person.name" (keyup)="changeName($event)"/>
+
+
+DATA [(BINDING)]
+
+El atributo ngModel permite el intercambio de datos de forma bidireccional entre el componente y la vista. Lo que suceda en el componente, se verá reflejado 
+en la vista. Lo que se suceda en la vista, inmediatamente impactará en el componente.
+
+ejemplo
+
+<H1>NgModel</H1>
+<p>Nombre {{person.name}}</p>
+<input type="text" required  #nameInput="ngModel" [(ngModel)]="person.name"/>
+<p>valid: {{nameInput.valid}}</p>
+
+
+ESTRUCTURAS DE CONTROL 
+
+*ngIf
+El condicional “If” es un “If” en Javascript, en Java, en PHP, en Python o en cualquier lenguaje. Angular posibilita utilizar este condicionante embebido en el HTML 
+para mostrar o no un elemento. Su sintaxis es algo particular, está compuesta por un asterisco seguido de las iniciales características de Angular “ng” y la palabra 
+“If”.
+<div *ngIf="isPlatzi">Hola, soy Platzi</div>
+
+If … else
+Para usar un else en Angular, la sintaxis es algo especial. Debes crear un template en tu código HTML usando la etiqueta que provee Angular llamada <ng-template> con 
+una Variable de Template, comenzando con #, para hacer referencia a este elemento desde tu If.
+
+<div *ngIf="isPlatzi; else templateElse">Hola, soy Platzi</div>
+<ng-template #templateElse>
+    <div>No soy Platzi</div>
+</ng-template
+
+
+*ngFor
+
+A lo igual que con un If, Angular permite iterar un array de números, de cadenas de caracteres o de objetos usando “*ngFor”.Si tienes en tu componente un array de 
+datos:
+
+<H1>ngFor</H1>
+<p>Nombres</p>
+<ul>
+  <li *ngFor=" let name of Names; index as i">
+   {{i}} {{name}} </li>
+</ul>
+<hr/>
+
+"let str of myArray; index as i">
+        {{ i }}. {{ str }}
+    </li>
+
+
+*ngFor para arrays
+
+
+Puedes utilizar *ngFor para iterar y mostrar cada propiedad de un objeto. Considera que en el componente tienes un array de objetos que representan a una persona:
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent {
+  peopleArray = [
+    {
+        firstname: 'Freddy',
+        lastname: 'Vega',
+        age: 35
+    },
+    {
+        firstname: 'Nicolas',
+        lastname: 'Molina',
+        age: 29
+    },
+    {
+        firstname: 'Ángela',
+        lastname: 'Ocando',
+        age: 30
+    }
+  ];
+}
+
+
+<ul *ngFor="let person of peopleArray">
+    <li>Nombre: {{ person.firstname }}</li>
+    <li>Apellido: {{ person.lastname }}</li>
+    <li>Edad: {{ person.age }}</li>
+</ul>
+
+
+LAS INTERFACES SON FORMAS DE ESPECIFICAR CUALES SON LOS ATRIBUTOS UE CONTIENE UN  OBJETO
+
+
+Uso de *ngSwitch
+Angular también ofrece la sentencia *ngSwitch y *ngSwitchCase para determinar el flujo de control de tu aplicación y qué elemento mostrar entre multiples
+ elementos HTML. Además de utilizar un elemento default con *ngSwitchDefault en caso de que ninguna condición se cumpla.
+
+
+NgClass y NgStyle
+
+Con el binding de [class] y [style] puedes agregar clases y estilos fácilmente. Pero se vuelve algo complicado en el caso de que necesites agregar varias clases o
+ modificar muchos estilos. Es por esto que Angular ofrece las directivas ngClass y ngStyle para este propósito.
+
+<div
+    [ngClass]="isAvailable ? 'active-class' : 'deactivate-class'"
+></div>
+
+O puedes usar las Interpolaciones en lugar del binding:
+
+<p
+    ngClass="{{ isAvailable ? 'active-class' : 'deactivate-class' }}"
+></p>
+
+

@@ -1,0 +1,50 @@
+<div class="show-mobile">
+  <div>
+    <button (click)="toggleMenu()">
+      <img src="./assets/svg/icon_menu.svg" alt="menu" />
+    </button>
+    <a href="">
+      <img class="img-logo" src="./assets/svg/logo.png" alt="logo">
+    </a>
+    <div class="cart">
+    <a href="">
+      <img src="./assets/svg/icon_shopping_cart.svg" alt="logo">
+    </a>
+    <span class="counter"> {{counter}} </span>
+  </div>
+</div>
+  <div class="side-menu" [class.active]="showMenu">
+    <button class="closes-side-menu" (click)="toggleMenu()">
+      <img class="img-menu"  src="./assets/svg/icons8-close.svg" alt="menu">
+    </button>
+    <ul>
+      <li><a href=""> All</a></li>
+      <li><a href=""> Clothes</a></li>
+      <li><a href=""> Shoes </a></li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="hide-mobile">
+  <div>
+    <nav>
+      <a class="logo" href="">
+        <img class="img-logo" src="./assets/svg/logo.png" alt="logo" />
+      </a>
+    </nav>
+    <div class="info">
+      <ul>
+        <li><a href=""> All</a></li>
+        <li><a href=""> Clothes</a></li>
+        <li><a href=""> Shoes </a></li>
+      </ul>
+      <div class="cart">
+        <a href="">
+          <img src="./assets/svg/icon_shopping_cart.svg" alt="logo" />
+        </a>
+        <span class="counter"> {{counter}} </span>
+      </div>
+    </div>
+  </div>
+</div>

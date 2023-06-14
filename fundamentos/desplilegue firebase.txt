@@ -1,0 +1,16 @@
+npm install -g firebase-tools
+
+Teniendo el CLI de Firebase instalado, podrás autenticarte para iniciar un proyecto nuevo:
+
+firebase login
+
+
+Posteriormente, estando situado desde la terminal en la raíz de tu proyecto, inicializa los servicios de Firebase:
+
+firebase init
+
+Selecciona la opción
+
+Hosting
+
+para iniciar la configuración de Firebase en tu proyecto:

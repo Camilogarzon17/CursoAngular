@@ -1,0 +1,18 @@
+<app-img *ngIf="product.images.length > 0" [img]="product.images[0]" (click)="onShowDetail()"></app-img>
+
+<div id="Container">
+
+<div id="contenedor">
+  <div id="principal">
+    <h2 class="cop">{{ product.price | currency:'Cop $'}}</h2>
+    <p>{{ product.title }}</p>
+  </div>
+  <div id="sidebar">
+    <p>
+      <button class="add-cart" (click)="onAddToCart()">
+        <img src="./assets/images/add-cart.png" alt="" >
+      </button>
+    </p>
+  </div>
+</div>
+

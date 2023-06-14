@@ -1,0 +1,310 @@
+COMPONENTES
+
+Prueba.html =  vista
+Prueba.sccs =  stylos 
+Prueba.spec.ts = pruebas 
+Prueba.component.ts = contiene toda la logica y el que realiza la union de html y stilo 
+
+Generar componente nuevo 
+
+ng g c 
+
+carpeta en especifico 
+
+>ng g c components/img
+
+@NgModule({
+  declarations: [
+    ...
+    TestNameComponent
+  ],
+  imports: [ ... ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+INPUT 
+
+funciona para pasar informacion desde el padre hasta el hijo 
+
+<app-test-name>
+    firstname="Platzi"
+</app-test-name>
+
+ @Input() set saludar(firstname: string) {
+        console.log('Hola', firstname)
+    };
+
+OUTPUT
+
+Funciona la informacion del hijo al padre
+
+<app-test-name>
+    (message)="recibirMensaje($event)"
+</app-test-name>
+
+Decorando la propiedad con el @Output() y creando una 
+instancia de EventEmitter podrás emitir un evento de la 
+siguiente manera:
+
+    ...
+    emitirEvento() {
+        this.message.emit('Hola soy Platzi');
+    }
+
+Llamando al método emit() de la instancia EventEmitter, 
+se enviará el valor al componente padre que se encuentre 
+escuchando el evento.
+
+componentes para productos (abstraccionn)
+
+Existen muchas situaciones en donde deberás enviar información de 
+un componente padre a su/s hijo/s, por eso, acá te mostraremos con 
+un ejemplo cómo funciona el componente para producto.
+
+Comunicando componente padre a hijo
+Un ejemplo real para el uso de la comunicación entre componente 
+podría ser para renderizar N cantidad de productos de un catálogo.
+
+Paso 1: Comienza creando una interfaz para tipear el modelo de 
+datos del Producto:
+
+// interfaces/producto.interface.ts
+export interface Producto {
+    id: number;
+    name: string;
+    precio: number;
+    image: string;
+}
+Paso 3: Este componente posee un array de productos para iterar en el HTML inicializando el componente <app-producto> por cada objeto en el array.
+
+<!-- components/catalogo/catalogo.component.html -->
+<app-producto *ngFor="let p of productos"
+    [producto]="p"
+></app-producto>
+
+
+CICLO DE VIDA
+
+
+Hooks más utilizados
+
+Constructor
+Como en toda clase en la programación orientada a objetos, el 
+constructor es quien crea la instancia del objeto y sus dependencias.
+
+*Solo se ejecuta una vez antes del render del componente.
+*No tiene que utilizarse para procesos asincrónicos.
+
+ngOnChanges
+El hook ngOnChanges() se dispara cada vez que se produce un cambio 
+de estado en el componente. Cuando una variable cambia de valor, 
+por ejemplo o ante el cambio de valor de un Input.
+
+*Se ejecuta N cantidad de veces antes y durante el render del 
+componente.
+*Puede emplearse para procesos asincrónicos.
+
+ngOnInit
+Es el hook más usado, ngOnInit() es ideal para cualquier solicitud 
+de datos asincrónicos a una API para preparar el componente antes de 
+renderizarlo.
+
+*Únicamente se ejecuta una vez, antes del render del componente.
+*Puede usarse para procesos asincrónicos.
+
+ngAfterViewInit
+Este hook únicamente se ejecuta una vez cuando el render del 
+componente haya finalizado. Puede serte útil para realizar acciones 
+programáticas que requieran que todo el HTML del componente ya este
+preparado.
+
+*Únicamente se ejecuta una vez después del render del componente.
+
+ngOnDestroy
+Finalmente, ngOnDestroy() se ejecutará cuando el componente es 
+destruido, o sea, cuando ya no existe en la interfaz del navegador. 
+Suele utilizarse para liberar espacios de memoria que el componente 
+requiera.
+
+Usando hook
+Los hooks de ciclo de vida de Angular, son interfaces que tienen 
+que importarse desde @angular/core para implementarlos en la clase 
+y así detectar los cambios en cada evento.
+
+import { Component, OnInit, AfterContentInit, OnDestroy } from '@angular/core';
+
+@Component({
+  selector: 'app-test-name',
+  templateUrl: './test-name.component.html',
+  styleUrls: ['./test-name.component.less']
+})
+export class TestNameComponent implements OnInit, AfterContentInit, OnDestroy {
+
+  constructor() {
+    console.log('1. Primero sucederá esto');
+  }
+
+  ngOnInit(): void {
+    console.log('2. Luego esto');
+  }
+  
+  ngAfterViewInit(): void {
+    console.log('3. Seguido de esto');
+  }
+
+  ngOnDestroy(): void {
+    console.log('4. Finalmente esto (cuando el componente sea destruido)');
+  } 
+}
+
+
+ngDestroy &amp; SetInput
+
+cualquier input 
+
+ngOnDestroy(changes: simpleChanges): void {
+	console.log('ngOnchanges','imgvalues =>', this.img); 
+	console.log(changes);
+    }
+
+setinput
+
+ @Input('img')
+ set changeImage(newImg: string){
+  this.img = newImg;
+  console.log('change just img =>',  this.img);
+  //code
+  }
+
+
+Lista de productos
+
+
+Comunicando con múltiples componentes hijos
+Haciendo uso de un ngFor, puedes crear y comunicarte con N cantidad de componentes hijos. Veamos un ejemplo:
+
+Paso 1: Crea una interfaz para tipear el modelo de datos del Producto.
+
+// interfaces/producto.interface.ts
+export interface Producto {
+    id: number;
+    name: string;
+    precio: number;
+    image: string;
+}
+
+
+Con el CLI de Angular, crea un servicio fácilmente con el comando ng generate service test-name o en su manera corta ng g s test-name. Dicho comando creará dos archivos:
+
+test-name.service.ts
+test-name.service.spec.ts
+Siendo el archivo .ts el servicio en sí y el archivo .spec.ts el que podrás usar para escribir pruebas unitarias para testear el servicio.
+
+El servicio tendrá por defecto el siguiente código:
+
+import { Injectable } from '@angular/core';
+@Injectable({
+  providedIn: 'root'
+})
+export class TestNameService {
+  constructor() { }
+}
+
+INTYECCION DE DEPENDENCIAS 
+
+import { Injectable } from '@angular/core';
+@Injectable({
+  providedIn: 'root'
+})
+export class TestNameService {
+  constructor() { }
+}
+
+Singleton
+En ingeniería de software, singleton o instancia única es un patrón de diseño que permite restringir la creación de objetos pertenecientes a una clase o el valor de un tipo a un único objeto. Su intención consiste en garantizar que una clase solo tenga una instancia y proporcionar un punto de acceso global a ella.
+Wikipedia.
+
+
+
+Consumo de API con Angular
+Paso 1: Comienza importando el módulo HttpClientModule, en el módulo principal de tu aplicación desde @angular/common/http.
+
+// app.module.ts
+import { HttpClientModule } from '@angular/common/http';
+
+@NgModule({
+  declarations: [
+    // ..
+  ],
+  imports: [
+    // ...
+    HttpClientModule
+  ],
+  providers: [],
+  bootstrap: [ /* .. */ ]
+})
+export class AppModule { }
+
+
+
+PIPES
+
+Si vamos a estar conociendo los pipes debemos empezar por definirlos, un Pipe es una función pura, o sea, una función que dado un determinado valor siempre devolverá el mismo resultado.
+
+Los Pipes no modifican el valor de un dato, simplemente le cambian el aspecto visual, Angular utiliza el concepto de Pipes para la transformación de datos.
+
+Tipos de pipes
+Angular posee por defecto algunos pipes que puedes utilizar para transformar números, fechas o cadenas de texto. Veamos los más importantes:
+
+DatePipe: Modifica fechas de acuerdo al formato necesitado.
+UpperCasePipe: Convierte todo el texto a mayúscula.
+LowerCasePipe: Convierte todo el texto en minúscula.
+CurrencyPipe: Convierte un número a la moneda o divisa necesitada.
+Podrás encontrar en la documentación oficial de Angular más Pipes y su funcionamiento.
+
+Utilizando pipes
+Los pipes se utilizan fácilmente en el HTML haciendo uso del carácter “|” seguido del nombre del pipe.
+
+<div>
+  {{ "hola soy platzi" | uppercase }}
+</div>
+<div>
+  {{ 1000 | currency:'USD' }}
+</div>
+
+
+CONOCIENDO LAS DIRECTIVAS
+
+
+Tu primera directiva
+Para crear tu primera directiva, es necesario usar el CLI de Angular con el comando ng generate directive test-name o en su forma corta ng g c test-name.
+
+Al igual que con los servicios y los pipelines, el comando CLI creará un archivo .ts con el código de tu directiva y un archivo .spec.ts para sus respectivas pruebas unitarias.
+
+El CLI también actualizará el archivo app.module.ts importando la directiva en las declarations[]. No olvides de asegurarte que se esté importando correctamente. De lo contrario, Angular no reconocerá la directiva.
+
+Las directivas por defecto tienen el siguiente aspect
+
+
+REACTIVIDAD
+
+
+El concepto de reactividad básica es muy importante en el desarrollo front-end. Se trata del estado de la aplicación con respecto al valor de los datos en cada componente, cómo estos cambian a medida que el usuario interactúa y cómo se actualiza la interfaz.
+
+Problemas en la comunicación de componentes
+Cuando pensamos en cómo comunicar un componente padre con su hijo y viceversa, solemos utilizar los decoradores @Input() y @Output().
+
+Pero muchas veces, en aplicaciones grandes, la comunicación de componentes se vuelve mucho más compleja y estas herramientas no alcanzan cuando se necesita enviar información de un componente “hijo” a uno “abuelo”.
+
+
+
+Estilos de codificación
+Con el comando ng add @angular-eslint/schematics podrás realizar la instalación automática de las herramientas que proporciona Angular, para inspeccionar tu código fuente en busca de incumplimientos a sus reglas.
+
+TIP: Instala la extensión “ESLint” en tu editor de texto o IDE de preferencia
+
+Una vez realizado este paso, es momento de evaluar el cumplimiento o no de esta guía de estilos. El comando ng lint arrojará por consola una lista de errores que la aplicación no cumple y que es necesario corregir.
+
+También puedes modificar e implementar tus propias reglas de codificación editando el archivo .eslintrc.json que fue creado en la raíz del proyecto.

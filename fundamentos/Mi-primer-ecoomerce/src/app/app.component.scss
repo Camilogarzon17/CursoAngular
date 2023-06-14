@@ -1,0 +1,88 @@
+.box{
+  height: 200px;
+  width: 200px;
+  overflow: auto;
+  background: darkorchid;
+}
+.Products--grid{
+  display: flex;
+  flex-direction: column;
+ div{
+    img{
+      width: 100%;
+      border-radius: 10px;
+    }
+    h2, p{
+      margin: 0;
+    }
+  }
+}
+
+.container{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.form-register {
+  text-align: center;
+  width: 300px;
+  background: #88f188;
+  padding: 30px;
+  margin: auto;
+  margin-top: 100px;
+  border-radius: 4px;
+  font-family: 'calibri';
+  color: rgb(0, 0, 0);
+  box-shadow: 7px 13px 37px rgb(11, 80, 11);
+
+
+  border-radius: 4px;
+  margin-bottom: 16px;
+  border: 1px solid green;
+}
+
+.buttonsumbit{
+  width: auto;
+  background: rgb(255, 237, 72);
+  border-radius: 20%;
+  border: none;
+  padding: 12px;
+  color: white;
+  margin: 10px 0;
+  font-size: 16px;
+
+}
+.message-error {
+  background: rgb(231, 74, 74);
+  color: white;
+  opacity: 0;
+  transition: all linear .5s;
+  &.invalid {
+    opacity: 1;
+  }
+}
+
+.line-error{
+  height: 0;
+  border-bottom: 1px solid;
+  &.invalid {
+    border-color: rgb(231, 74, 74);
+  }
+  &.valid{
+    border-color: rgb(56, 252, 186);
+  }
+}
+.styles{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media screen and (min-width: 40em) {
+  .Products--grid{
+  display: grid;
+grid-template-columns: repeat(5, 1fr);
+grid-gap: 15px;
+  }
+}
+

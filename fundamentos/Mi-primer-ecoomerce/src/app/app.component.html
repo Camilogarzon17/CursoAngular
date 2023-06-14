@@ -1,0 +1,185 @@
+<H1>Formulario registro</H1>
+<form (ngSubmit)="onRegister()" #myForm="ngForm">
+<div class="container">
+  <div class="form-register ">
+    <H1>Formulario de registro</H1>
+    <label for="name">Nombre</label>
+    <br>
+    <input type="text" name="name" required id="name" [(ngModel)]="register.name">
+    <p> Mensaje de error </p>
+    <label for="email">Email</label>
+    <br>
+    <input type="email" name="email" required id="email" [(ngModel)]="register.email">
+    <p> Mensaje de error </p>
+    <label for="password">Password</label>
+    <br>
+    <input type="password" name="password" required id="password" [(ngModel)]="register.password">
+    <p> Mensaje de error </p>
+    <button class="buttonsumbit" [disabled]="myForm.invalid"  type="submit"> Registrar </button>
+  </div>
+</div>
+</form>
+<hr/>
+
+<H1>ngclass & ngStyle</H1>
+<input type="text" required #nameInput4="ngModel"[(ngModel)]="person.name"/>
+<hr class="line-error"
+[ngClass]="{
+  'valid': nameInput4.valid,
+  'invalid': nameInput4.invalid
+}"
+/>
+<p class="message-error" [class.invalid]="nameInput2.invalid">
+  El campo es requerido
+ </p>
+ <div class="styles">
+    <div>
+      <input type="number" [(ngModel)]="box.width"/>
+      <input type="number" [(ngModel)]="box.height"/>
+      <input type="color" [(ngModel)]="box.background"/>
+    </div>
+    <div [ngStyle]="{
+      'width.px': box.width,
+      'height.px': box.height,
+      'background-color': box.background,
+      'display': 'block'
+    }"></div>
+ </div>
+<hr/>
+<H1>Clases y stylos </H1>
+<input type="text" required #nameInput2="ngModel" [(ngModel)]="person.name"/>
+ <p class="message-error" [class.invalid]="nameInput2.invalid">
+    El campo es requerido</p>
+<label>Nombre</label>
+<input type="text" required #nameInput3="ngModel"[(ngModel)]="person.name"/>
+<P [style.font-style]="nameInput3.invalid ? 'italic' : 'normal'"> El campo es requerido  </P>
+
+<div class="styles">
+  <div>
+    <input type="text" [(ngModel)]="widthImg"/>
+  </div>
+  <div>
+    <img [style.width.px]="widthImg" [src]="person.avatar" />
+  </div>
+</div>
+<hr/>
+<H1>ngSwitch</H1>
+<input type="text" required [(ngModel)]="person.name"  />
+<div [ngSwitch]="person.name">
+<p *ngSwitchCase="'nicolas'">
+  La persona es nicolas
+</p>
+<p>
+<p *ngSwitchCase="'Felipe'">
+    La persona es Felipe
+</p>
+<p>
+<p *ngSwitchCase="'Jorge'">
+    La persona es Jorge
+</p>
+<p>
+<p *ngSwitchCase="'Camilo'">
+    La persona es Camilo
+</p>
+<p *ngSwitchDefault> No hace match</p>
+</div>
+<!--<p *ngIf="person.name === 'nicolas'">
+        La persona es nicolas
+</p>
+<p>
+  <input type="text" required [(ngModel)]="person.name" />
+  <p *ngIf="person.name === 'Felipe'">
+          La persona es Felipe
+</p>
+<p>
+  <input type="text" required [(ngModel)]="person.name" />
+  <p *ngIf="person.name === 'Jorge'">
+          La persona es Jorge
+</p>
+<p>
+  <input type="text" required [(ngModel)]="person.name" />
+  <p *ngIf="person.name === 'Camilo'">
+          La persona es Camilo
+</p> -->
+
+<hr/>
+<H1>*ngFor para objetos</H1>
+<div class="Products--grid">
+<div *ngFor="let product of products">
+<img [src]="product.image" alt="image">
+<h2>{{ product.price }}</h2>
+<p>{{ product.name }}</p>
+</div>
+</div>
+<hr/>
+
+<H1>*ngFor</H1>
+<p>Nombres</p>
+<input type="text" required [(ngModel)]="NewName"/>
+<button (click)="addName()">Add Name</button>
+
+<ul>
+  <li *ngIf="Names.length === 0">  No hay Nombres En La Lista</li>
+  <li *ngFor=" let name of Names; index as i">
+   {{i}} {{name}}
+   <button (click)="DeleteName(i)"> Delete </button>
+  </li>
+</ul>
+
+<h3>Reto propuesto</h3>
+
+<p>Nombres</p>
+<input type="text" required [(ngModel)]="NewNam"/>
+<p>Edad</p>
+<input type="number" required [(ngModel)]="NewAge"/>
+<br>
+<button (click)="addPerson()">Add person</button>
+<ul>
+  <li *ngIf="Personas.length === 0">  No hay personas En La Lista</li>
+  <li *ngFor=" let persona of Personas; index as i">
+   {{ i + 1 }} {{persona}}
+   <button (click)="DeletePerson(i)"> Delete </button>
+  </li>
+</ul>
+
+<hr/>
+
+<H1>*ngif</H1>
+<input type="text" required [(ngModel)]="person.name"/>
+<p *ngIf="person.name === 'Camilo' && person.age == 20; else elseBLock">mi nombre es Camilo</p>
+<ng-template #elseBLock>
+  <p> Bloque de else</p>
+</ng-template>
+<hr/>
+<H1>NgModel</H1>
+<p>Nombre {{person.name}}</p>
+<input type="text" required  #nameInput="ngModel" [(ngModel)]="person.name"/>
+<p>valid: {{nameInput.valid}}</p>
+
+<p>Edad {{person.age}}</p>
+<input type="number" max="19" min="10" required  #ageInput="ngModel" [(ngModel)]="person.age"/>
+<p>valid: {{ageInput.valid}}</p>
+<hr/>
+<H1>Eventos</H1>
+<button [disabled]="btnDisabled">Enviar</button>
+<button (click)="toggleButton()">Toggle Button </button>
+<p>Edad {{person.age}}</p>
+<button (click)="increaseage()">Age ++</button>
+<div class="box" (scroll)="onscroll($event)">
+<p>orem ipsum dolor sit amet consectetur adipisicing elit. Magnam modi quia rerum minus dolore odio corporis alias velit quod, distinctio officiis eos omnis magni nam deleniti beatae qui fuga voluptates! Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.</p>
+</div>
+<p>nombre {{person.name}}</p>
+<input type="text" [value]="person.name" (keyup)="changeName($event)"/>
+
+<hr/>
+<h1>propiedades</h1>
+<button [disabled]="btnDisabled">Enviar</button>
+<input type="text" [value]="person.name" />
+<progress max="100" [value]="person.age"> </progress>
+<img width="120" [src]="person.avatar" />
+<hr/>
+<h1> HOLA MUNDO</h1>
+<h2> {{ 'Hola Mundo'.repeat(5) }}</h2>
+<p> 3 + 3 = {{3 + 3}} </p>
+<h3>Hola, soy {{ name }} y tengo {{age}}</h3>
+<img width="100" src={{img}} alt="Image">
