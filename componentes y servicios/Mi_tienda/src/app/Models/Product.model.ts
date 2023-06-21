@@ -3,7 +3,7 @@ export interface Category{
   name: string;
 }
 
-export interface products{
+export interface Products{
   id: string;
   title: string;
   price: number;
@@ -12,6 +12,8 @@ export interface products{
   category: Category;
 }
 
-export interface createProductsDTO extends Omit<products,'id' | 'category'>{
+export interface CreateProductsDTO extends Omit<Products,'id' | 'category'>{
   categoryId: Number;
 }
+
+export interface UpdateProductDTO extends Partial<CreateProductsDTO>{}

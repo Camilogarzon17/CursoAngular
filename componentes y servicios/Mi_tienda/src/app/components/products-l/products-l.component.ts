@@ -1,7 +1,7 @@
 import { isNgTemplate } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 
-import { products, createProductsDTO } from '../../Models/Product.model';
+import { Products, CreateProductsDTO, UpdateProductDTO } from '../../Models/Product.model';
 import { StoreService } from '../../services/store.service';
 import { ProductsService } from '../../services/products.service';
 
@@ -11,11 +11,11 @@ import { ProductsService } from '../../services/products.service';
   styleUrls: ['./products-l.component.scss'],
 })
 export class ProductsLComponent implements OnInit {
-  myShopingCart: products[] = [];
+  myShopingCart: Products[] = [];
   total = 0;
-  product: products[] = [];
+  product: Products[] = [];
   showProductDetail = false;
-  productChosen: products={
+  productChosen: Products = {
     id: '',
     price: 0,
     images: [],
@@ -40,21 +40,21 @@ export class ProductsLComponent implements OnInit {
     });
   }
 
-  onAddToshopingCart(product: products) {
+  onAddToshopingCart(product: Products) {
     this.storeService.addProduct(product);
     this.total = this.storeService.getTotal();
   }
 
-  onShowDetail(id: string){
+  onShowDetail(id: string) {
     this.productsService.getproduct(id)
-    .subscribe(data =>{
-      this.toggleProductDetail();
-      this.productChosen = data;
-    })
+      .subscribe(data => {
+        this.toggleProductDetail();
+        this.productChosen = data;
+      })
   }
 
-  createNewProduct(){
-    const  products: createProductsDTO = {
+  createNewProduct() {
+    const products: CreateProductsDTO = {
       title: 'Nuevo producto',
       description: 'loren ipsun',
       images: ['https://placeimg.com/640/480/any?random=${Math.random()}'],
@@ -62,11 +62,23 @@ export class ProductsLComponent implements OnInit {
       categoryId: 2,
     }
     this.productsService.create(products)
-    .subscribe(data => {
-      this.product.unshift(data);
-    });
+      .subscribe(data => {
+        this.product.unshift(data);
+      });
   }
 
+  updateProduct() {
+    const changes: UpdateProductDTO = {
+      title: 'New title',
+    }
+    const id = this.productChosen.id;
+    this.productsService.update(id, changes)
+      .subscribe(data => {
+        //console.log('updated', data);
+        const productIndex = this.product.findIndex(item => item.id === this.productChosen.id);
+        this.product[productIndex] = data;
+      });
+  }
   toggleProductDetail() {
     this.showProductDetail = !this.showProductDetail;
   }
