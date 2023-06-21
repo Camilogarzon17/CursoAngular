@@ -25,4 +25,8 @@ private apiUrl = 'https://young-sands-07814.herokuapp.com/api/products';
   update(id: string ,dto: any){
     return this.http.put<Products>(`${this.apiUrl}/${id}`, dto);
   }
+
+  delete(id: string){
+    return this.http.delete<boolean>(`${this.apiUrl}/${id}`);
+  }
 }

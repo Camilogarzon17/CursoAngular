@@ -79,6 +79,18 @@ export class ProductsLComponent implements OnInit {
         this.product[productIndex] = data;
       });
   }
+
+  deleteProduct(){
+    const id = this.productChosen.id;
+    this.productsService.delete(id)
+    .subscribe(() => {
+      const productIndex = this.product.findIndex(item => item.id === this.productChosen.id);
+      this.product.splice(productIndex, 1);
+      this.showProductDetail = false;
+
+    });
+  }
+
   toggleProductDetail() {
     this.showProductDetail = !this.showProductDetail;
   }

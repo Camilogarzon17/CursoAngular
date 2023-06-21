@@ -18,7 +18,8 @@
       {{ productChosen.title }}
     </h1>
     <p class="description-prodduct">{{ productChosen.description }}</p>
-    <button class="shop" (click)="toggleProductDetail()"> Buy </button>
-    <button (click)="updateProduct()">edit</button>
+    <button class="shop" (click)="onAddToshopingCart(productChosen)"> Buy </button>
+    <button class="shop" (click)="updateProduct()">edit</button>
+    <button class="shop" (click)="deleteProduct()">delete</button>
   </div>
 </div>
