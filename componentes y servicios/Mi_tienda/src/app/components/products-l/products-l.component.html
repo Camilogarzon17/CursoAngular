@@ -2,6 +2,9 @@
 <div class="products--grid">
   <app-products [product]="products" *ngFor="let products of product" (addedProduct)="onAddToshopingCart($event)"
     (showProduct)="onShowDetail($event)"></app-products>
+  <button (click)="loadMore()">Load More</button>
+  <button (click)="loadPreviousPage()">Página Anterior</button>
+  <button (click)="loadNextPage()">Página Siguiente</button>
 </div>
 <div class="product-detail" [class.active]="showProductDetail">
   <div class="container" *ngIf="productChosen">
@@ -18,8 +21,10 @@
       {{ productChosen.title }}
     </h1>
     <p class="description-prodduct">{{ productChosen.description }}</p>
-    <button class="shop" (click)="onAddToshopingCart(productChosen)"> Buy </button>
-    <button class="shop" (click)="updateProduct()">edit</button>
-    <button class="shop" (click)="deleteProduct()">delete</button>
+    <div style="display: inline-flex;margin-left: 25%;">
+      <button class="shop" (click)="onAddToshopingCart(productChosen)"> Buy </button>
+      <button class="shop" (click)="updateProduct()">edit</button>
+      <button class="shop" (click)="deleteProduct()">delete</button>
+    </div>
   </div>
 </div>
